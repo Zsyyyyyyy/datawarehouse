@@ -48,6 +48,7 @@ object AlertApp1 {
 //        orderDStream.print()
         //value.print()
         env.execute()
+
     }
 //    class MyJDBCSink() extends RichSinkFunction[OrderNum] {
 //        //var updateStmt: PreparedStatement = _
