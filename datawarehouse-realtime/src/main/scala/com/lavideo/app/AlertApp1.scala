@@ -19,9 +19,9 @@ object AlertApp1 {
     var insertStmt: PreparedStatement = _
     def main(args: Array[String]): Unit = {
         val conf = new Configuration()
-//        conf.setInteger(RestOptions.PORT, 8081)
-//        val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)
-        val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+        conf.setInteger(RestOptions.PORT, 8081)
+        val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)
+//        val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
         val stream: DataStream[String] = MyKafkaUtil1.getKafkaDStream(env, "log-lavideo-order")
         stream.print()
 //        val value: DataStream[(OriginalOrderLog, Int)] = stream.map(log => {
