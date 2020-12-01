@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="datawarehouse" target="1.5" />
-      <module name="datawarehouse-realtime" target="1.5" />
+      <module name="datawarehouse-realtime" target="1.8" />
       <module name="warehouse-realtime" target="1.8" />
     </bytecodeTargetLevel>
   </component>
