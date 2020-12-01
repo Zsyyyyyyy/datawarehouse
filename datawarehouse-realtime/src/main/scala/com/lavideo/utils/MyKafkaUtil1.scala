@@ -18,7 +18,6 @@ object MyKafkaUtil1 {
     prop.setProperty("auto.offset.reset", "latest")
     val topic = "log-lavideo-order"
     def getKafkaDStream(env : StreamExecutionEnvironment, topic : String) :DataStream[String] = {
-
         val value: DataStream[String] = env.addSource(
             new FlinkKafkaConsumer011[String](topic, new SimpleStringSchema(), prop)
         )
