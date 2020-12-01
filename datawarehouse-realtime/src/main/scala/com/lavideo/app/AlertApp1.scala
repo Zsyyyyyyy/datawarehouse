@@ -22,52 +22,53 @@ object AlertApp1 {
         conf.setInteger(RestOptions.PORT, 8081)
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(conf)
         val stream: DataStream[String] = MyKafkaUtil1.getKafkaDStream(env, "log-lavideo-order")
-        val value: DataStream[(OriginalOrderLog, Int)] = stream.map(log => {
-            val originalOrderLog: OriginalOrderLog = JSON.parseObject(log, classOf[OriginalOrderLog])
-            (originalOrderLog, 1)
-        }
-        )
-        val sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm")
-        val orderDStream: DataStream[OrderNum] = value
-          .keyBy(_._1.platform)
-          .timeWindow(Time.seconds(10), Time.seconds(10))
-          .sum(1)
-          .map(log => {
-              var apple_num = 0
-              var google_num = 0
-              if (log._1.platform.equals("apple")) {
-                  apple_num = log._2
-              } else {
-                  google_num = log._2
-              }
-              OrderNum(apple_num, google_num, sdf.format(new Date(System.currentTimeMillis())))
-          })
-        orderDStream.addSink(new MyJDBCSink())
-        orderDStream.print()
+        stream.print()
+//        val value: DataStream[(OriginalOrderLog, Int)] = stream.map(log => {
+//            val originalOrderLog: OriginalOrderLog = JSON.parseObject(log, classOf[OriginalOrderLog])
+//            (originalOrderLog, 1)
+//        }
+//        )
+//        val sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm")
+//        val orderDStream: DataStream[OrderNum] = value
+//          .keyBy(_._1.platform)
+//          .timeWindow(Time.seconds(10), Time.seconds(10))
+//          .sum(1)
+//          .map(log => {
+//              var apple_num = 0
+//              var google_num = 0
+//              if (log._1.platform.equals("apple")) {
+//                  apple_num = log._2
+//              } else {
+//                  google_num = log._2
+//              }
+//              OrderNum(apple_num, google_num, sdf.format(new Date(System.currentTimeMillis())))
+//          })
+//        orderDStream.addSink(new MyJDBCSink())
+//        orderDStream.print()
         //value.print()
         env.execute()
     }
-    class MyJDBCSink() extends RichSinkFunction[OrderNum] {
-        //var updateStmt: PreparedStatement = _
-        override def open(parameters: Configuration): Unit = {
-        }
-        conn = DriverManager.getConnection(
-            "jdbc:mysql://cluster102:3306/visual?useSSL=false","root","123456")
-        insertStmt = conn.prepareStatement(
-            "INSERT INTO visual.order_pay_num(apple,google,ts) VALUES(?,?,?)")
-
-        override def invoke(value: OrderNum, context: SinkFunction.Context[_]): Unit = {
-            insertStmt.setInt(1,value.apple_num)
-            insertStmt.setInt(2,value.google_num)
-            insertStmt.setString(3,value.ts)
-            insertStmt.execute()
-            //conn.commit()
-        }
-        override def close(): Unit = {
-            insertStmt.close()
-            conn.close()
-        }
-    }
+//    class MyJDBCSink() extends RichSinkFunction[OrderNum] {
+//        //var updateStmt: PreparedStatement = _
+//        override def open(parameters: Configuration): Unit = {
+//        }
+//        conn = DriverManager.getConnection(
+//            "jdbc:mysql://cluster102:3306/visual?useSSL=false","root","123456")
+//        insertStmt = conn.prepareStatement(
+//            "INSERT INTO visual.order_pay_num(apple,google,ts) VALUES(?,?,?)")
+//
+//        override def invoke(value: OrderNum, context: SinkFunction.Context[_]): Unit = {
+//            insertStmt.setInt(1,value.apple_num)
+//            insertStmt.setInt(2,value.google_num)
+//            insertStmt.setString(3,value.ts)
+//            insertStmt.execute()
+//            //conn.commit()
+//        }
+//        override def close(): Unit = {
+//            insertStmt.close()
+//            conn.close()
+//        }
+//    }
 
 }
 

@@ -9,8 +9,8 @@ import org.apache.flink.streaming.api.scala._
 
 object MyKafkaUtil1 {
     private val prop = new Properties()
-    //prop.setProperty("bootstrap.servers","cluster102:9092,cluster103:9092,cluster104:9092")
-    prop.setProperty("bootstrap.servers","localhost:9092")
+    prop.setProperty("bootstrap.servers","cluster102:9092,cluster103:9092,cluster104:9092")
+//    prop.setProperty("bootstrap.servers","localhost:9092")
 
     prop.setProperty("group.id","order-num")
     prop.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
