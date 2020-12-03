@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/datawarehouse.iml" filepath="$PROJECT_DIR$/datawarehouse.iml" />
-      <module fileurl="file://$PROJECT_DIR$/datawarehouse-realtime/datawarehouse-realtime.iml" filepath="$PROJECT_DIR$/datawarehouse-realtime/datawarehouse-realtime.iml" />
       <module fileurl="file://$PROJECT_DIR$/warehouse-realtime/warehouse-realtime.iml" filepath="$PROJECT_DIR$/warehouse-realtime/warehouse-realtime.iml" />
     </modules>
   </component>

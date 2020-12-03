@@ -30,7 +30,7 @@ object OrderAlertApp {
 
         //读取Kafka Event 主题数据创建流
         val kafkaDStream: InputDStream[ConsumerRecord[String, String]] =
-        MyKafkaUtil.getKafkaStream(ssc, Set("log-vivalive-xjp"))
+        MyKafkaUtil.getKafkaStream(ssc, Set("log-lavideo-order"))
 //        MyKafkaUtil.getKafkaStream(ssc, Set("log-lavideo-order"))
         kafkaDStream.map(record=>record.value).print()
 

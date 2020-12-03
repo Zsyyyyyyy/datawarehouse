@@ -9,6 +9,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/../datawarehouse-realtime/pom.xml" />
+        <option value="$PROJECT_DIR$/datawarehouse-realtime/pom.xml" />
       </set>
     </option>
   </component>
